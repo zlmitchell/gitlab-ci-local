@@ -38,11 +38,12 @@ Improvements to the original gitlab-ci-local project (not web-specific).
 - **Rsync Caching** - Skip file sync when git state unchanged
   - Hash-based cache in `.gitlab-ci-local/rsync-cache-{target}.txt`
   - Checks HEAD commit, uncommitted changes, and untracked files
-- **Docker Socket Auto-Detection** - Automatic DOCKER_HOST configuration
+- **Docker Socket Auto-Detection** - Automatic DOCKER_HOST configuration (addresses [#1026](https://github.com/firecow/gitlab-ci-local/issues/1026), [#1686](https://github.com/firecow/gitlab-ci-local/issues/1686))
   - Supports Linux, WSL, Docker Desktop (macOS), and alternative socket paths
 - **GitLab !reference Tag Support** - Proper YAML parsing for `!reference [path]` syntax
-- **Bundled GitLab Templates** - Offline access to Security/Workflow templates
+- **Bundled GitLab Templates** - Offline access to Security/Workflow templates (addresses [#1661](https://github.com/firecow/gitlab-ci-local/issues/1661))
   - Template includes work without internet connectivity
+  - Fixes heap out of memory crash when including GitLab templates
 - **Pipeline IID Synchronization** - Consistent IDs between web UI and CLI execution
 - **Docker Security Options** - New `--security-opt` flag for Docker executor
   - Pass options like `seccomp=unconfined` or `apparmor=unconfined`
@@ -69,4 +70,3 @@ Build system and tooling improvements.
   - Comprehensive web UI test suite (133 tests, 4700+ lines)
   - `npm run test-except-dind` for faster local testing
 - **CI/CD Pipeline** - DAG-based parallel builds with multi-platform binary outputs
-- **CLAUDE.md** - AI assistant guidance for codebase navigation

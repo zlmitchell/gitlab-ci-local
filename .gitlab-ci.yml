@@ -48,7 +48,7 @@ unit-tests:
   script:
     - npm install --legacy-peer-deps
     - npm run build --verbose
-    - npm run test-except-dind --verbose
+    - npm run test-except-dind -- --maxWorkers=2 --verbose 
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   allow_failure: true
   artifacts:
@@ -69,7 +69,7 @@ coverage:
     - unit-tests
   script:
     - npm install --legacy-peer-deps
-    - npm run coverage --verbose
+    - npm run coverage -- --maxWorkers=2 --verbose
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   allow_failure: true
   artifacts:

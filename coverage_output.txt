@@ -1,0 +1,45 @@
+
+> gitlab-ci-local@4.64.1 coverage
+> npm run build && FORCE_COLOR=1 npm run test -- --coverage --verbose
+
+
+> gitlab-ci-local@4.64.1 build
+> npm run cleanup && npm run generate-templates && npm run generate-embedded && tsc
+
+
+> gitlab-ci-local@4.64.1 cleanup
+> (git clean -fX tests/ && git clean -fX src/ -e 'src/web/frontend/lib/') 2>/dev/null || find tests/ src/ -name '*.js' -type f ! -path '*/lib/*' -delete 2>/dev/null || true
+
+Removing src/bundled-templates.ts
+
+> gitlab-ci-local@4.64.1 generate-templates
+> tsx scripts/generate-bundled-templates.ts
+
+Fetching GitLab CI templates...
+  Fetching Workflows/...
+    Found 2 templates
+  Fetching Jobs/...
+    Found 27 templates
+  Fetching Security/...
+    Found 25 templates
+
+Generated /app/src/bundled-templates.ts with 54 templates
+
+> gitlab-ci-local@4.64.1 generate-embedded
+> tsx scripts/generate-embedded.ts
+
+Generating embedded.ts...
+  Read CSS: 23377 bytes from styles/embedded.css
+  Bundled JS: 63073 bytes from app-bundle.ts
+  Generated: /app/src/web/frontend/embedded.ts
+  Total size: 88452 bytes
+Done!
+
+> gitlab-ci-local@4.64.1 test
+> FORCE_COLOR=1 NODE_OPTIONS="$NODE_OPTIONS --experimental-vm-modules --disable-warning=ExperimentalWarning" jest --testTimeout 300000 --coverage --verbose
+
+jest-haste-map: Haste module naming collision: gitlab-ci-local
+  The following files share their name; please adjust your hasteImpl:
+    * <rootDir>/package.json
+    * <rootDir>/.gitlab-ci-local/builds/.docker/package.json
+
